@@ -12,3 +12,4 @@ Use the saved 'animation.gif' to generate binary masks for each pixel.
 Use the binary masks to add predictions on the original image.
 
 ### [Extracting Motion and Appearance via Inter-Frame Attention for Efficient Video Frame Interpolation] (https://github.com/MCG-NJU/EMA-VFI)
+Use the pre-trained model from Zhang, et al.'s research to generate predictions within some time intervals.
