@@ -1,0 +1,30 @@
+// Import the image collection
+var dataset = ee.ImageCollection('NOAA/VIIRS/DNB/MONTHLY_V1/VCMCFG');
+
+// Define the region of interest to clip the images
+var roi = ee.Geometry.Rectangle([115.74808227539063, 38.65281520460119, 118.50290405273438, 40.33346776851382]); // replace with your own coordinates
+
+// Define a function to export images
+var exportImage = function(image, index, list) {
+  image = ee.Image(image); // Cast the image object as an ee.Image
+  var clipped = image.clip(roi);
+  var name = 'night_time_' + (index + 1).toString(); // Define the name for the exported file starting from 1
+  
+  // Export the image to Google Drive
+  Export.image.toDrive({
+    image: clipped.toFloat(), // Export as a floating point image
+    description: name,
+    folder: 'night_time',
+    region: roi,
+    scale: 500, // Adjust the scale as needed
+    maxPixels: 1e13 // Set the maximum number of pixels to export
+  });
+  
+  return ee.List(list).add(image); // Add the image to the list
+};
+
+// Iterate over the image collection and call the exportImage function
+var images = dataset.toList(dataset.size());
+for (var i = 0; i < images.size().getInfo(); i++) {
+  exportImage(images.get(i), i, []);
+}
