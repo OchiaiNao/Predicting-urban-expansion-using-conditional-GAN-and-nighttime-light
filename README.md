@@ -11,5 +11,8 @@ Use the saved 'animation.gif' to generate binary masks for each pixel.
 ### combine_masks.py
 Use the binary masks to add predictions on the original image.
 
+### save_data.py
+Use rasterio to covert .tiff tile to .jpg
+
 ### [Extracting Motion and Appearance via Inter-Frame Attention for Efficient Video Frame Interpolation] (https://github.com/MCG-NJU/EMA-VFI)
 Use the pre-trained model from Zhang, et al.'s research to generate predictions within some time intervals.
